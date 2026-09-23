@@ -1,0 +1,21 @@
+# Synced reference material and local working artifacts
+sources/
+tmp/
+doc_review_render/
+__pycache__/
+*.pyc
+
+# FreeCAD recovery and editor files
+*.FCStd1
+*.bak
+*.swp
+
+# OpenFOAM generated runtime data
+openfoam/**/processor*/
+openfoam/**/postProcessing/
+openfoam/**/logs/
+openfoam/**/log.*
+
+# Operating-system metadata
+Thumbs.db
+.DS_Store

@@ -27,6 +27,16 @@ PIVOTS = {
 ROTOR_OFFSET = App.Vector(0, 0, 190)
 PUSHER_PIVOT = App.Vector(3065, 0, 25)
 
+AIRCRAFT_OBJECTS = [
+    "FlightRoot", "AirframeStatic",
+    "TiltPod_FL", "TiltPod_FR", "TiltPod_RL", "TiltPod_RR",
+    "Nacelle_FL", "Nacelle_FR", "Nacelle_RL", "Nacelle_RR",
+    "Rotor_FL", "Rotor_FR", "Rotor_RL", "Rotor_RR",
+    "RotorBlades_FL", "RotorBlades_FR", "RotorBlades_RL", "RotorBlades_RR",
+    "PusherRotor", "PusherBlades",
+]
+REFERENCE_OBJECTS = ["Ground", "Runway", "RunwayMarkings", "FlightTrajectory"]
+
 
 def clamp(value, low=0.0, high=1.0):
     return max(low, min(high, value))
@@ -169,9 +179,38 @@ class FlightAnimation:
         self.timer.setInterval(round(1000.0 / FPS))
         self.view = Gui.activeDocument().activeView()
         Gui.activeDocument().activeView().setAnimationEnabled(True)
+        self.show_aircraft()
         Gui.Selection.clearSelection()
         Gui.Selection.addSelection(document.getObject("AnimationController"))
         self.apply(0.0)
+        self.frame_aircraft()
+
+    def show_aircraft(self):
+        """Undo saved/group visibility states that can hide the moving assembly."""
+        for name in AIRCRAFT_OBJECTS:
+            obj = self.doc.getObject(name)
+            if obj is not None:
+                obj.ViewObject.Visibility = True
+        trajectory = self.doc.getObject("FlightTrajectory")
+        if trajectory is not None:
+            trajectory.ViewObject.Visibility = False
+
+    def frame_aircraft(self):
+        """Fit the aircraft, not the 16 m runway/trajectory, in the initial view."""
+        saved_visibility = {}
+        for name in REFERENCE_OBJECTS:
+            obj = self.doc.getObject(name)
+            if obj is not None:
+                saved_visibility[name] = obj.ViewObject.Visibility
+                obj.ViewObject.Visibility = False
+        self.view.viewAxonometric()
+        self.view.fitAll()
+        for name, visible in saved_visibility.items():
+            # Keep the long trajectory hidden so it never dominates the view.
+            self.doc.getObject(name).ViewObject.Visibility = (
+                False if name == "FlightTrajectory" else visible
+            )
+        Gui.updateGui()
 
     def apply(self, progress):
         state = state_at(progress)

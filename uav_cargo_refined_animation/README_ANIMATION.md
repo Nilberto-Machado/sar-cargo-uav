@@ -17,8 +17,12 @@ O arquivo `CargoUAV_Refined_Flight_Animated.FCStd` representa a sequência cinem
 
 1. Abra `CargoUAV_Refined_Flight_Animated.FCStd`.
 2. Acesse `Macro > Macros...`.
-3. Selecione `animate_flight.py` nesta pasta e clique em `Execute`.
+3. Abra ou selecione `Run_Flight_Animation.FCMacro` nesta pasta e clique em `Execute`.
 4. Se o arquivo não aparecer, use `Create`/`Open` na janela de macros para selecioná-lo.
+
+Abrir apenas o arquivo `.FCStd` não inicia a animação. Depois de executar o macro, a
+aeronave é tornada visível automaticamente, a trajetória auxiliar é ocultada e a câmera
+é enquadrada sobre o avião antes da decolagem.
 
 Alternativamente, cole no console Python do FreeCAD:
 
