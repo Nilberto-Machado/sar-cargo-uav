@@ -1,0 +1,8 @@
+Hybrid VTOL cargo UAV geometry validation
+=========================================
+Airframe: {'valid': True, 'closed': True, 'solids': 1, 'faces': 336, 'volume_mm3': 603275235.0803672, 'bbox_mm': (2850.0, 4200.0, 1056.7150510045149)}
+Pusher disk: {'valid': True, 'closed': True, 'solids': 1, 'faces': 3, 'volume_mm3': 1832176.8355735675, 'bbox_mm': (8.0, 539.8321582804408, 540.0)}
+VTOL disks: {'valid': True, 'closed': True, 'solids': 4, 'faces': 12, 'volume_mm3': 10887503.500280784, 'bbox_mm': (2010.0, 2659.76377832062, 6.0)}
+Wing area: 2.604 m2
+Aspect ratio: 6.774
+FreeCAD: ['1', '1', '3', '20260725 (Git shallow)', 'Unknown', '2026/07/25 04:52:02', 'grafted,grafted', '145529fe741292ff0b3977a01195bf0247425794']

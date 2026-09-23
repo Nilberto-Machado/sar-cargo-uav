@@ -1,0 +1,76 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : surfaceCheck constant/geometry/CargoUAV_cruise_m.stl
+Date   : Sep 22 2026
+Time   : 19:05:58
+Host   : "V4"
+PID    : 1273
+I/O    : uncollated
+Case   : /mnt/c/Users/nilbe/.codex/.chatgpt-projects/g-p-6ab2deb0963c8191aae099dcf40ea6da/openfoam/cruise_25ms_alpha0
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Reading surface from "constant/geometry/CargoUAV_cruise_m.stl" ...
+
+Statistics:
+Triangles    : 10258
+Vertices     : 5131
+Bounding Box : (0 -2.1 -0.31651) (2.85 2.1 0.587835)
+
+Region	Size
+------	----
+patch0	10258
+
+
+Surface has no illegal triangles.
+
+Triangle quality (equilateral=1, collapsed=0):
+    0 .. 0.05  : 0.295574
+    0.05 .. 0.1  : 0.0994346
+    0.1 .. 0.15  : 0.107136
+    0.15 .. 0.2  : 0.0737961
+    0.2 .. 0.25  : 0.0405537
+    0.25 .. 0.3  : 0.0555664
+    0.3 .. 0.35  : 0.0528368
+    0.35 .. 0.4  : 0.0329499
+    0.4 .. 0.45  : 0.0524469
+    0.45 .. 0.5  : 0.0336323
+    0.5 .. 0.55  : 0.0465978
+    0.55 .. 0.6  : 0.0382141
+    0.6 .. 0.65  : 0.0253461
+    0.65 .. 0.7  : 0.0148177
+    0.7 .. 0.75  : 0.00877364
+    0.75 .. 0.8  : 0.00682394
+    0.8 .. 0.85  : 0.0044843
+    0.85 .. 0.9  : 0.00701891
+    0.9 .. 0.95  : 0.0038994
+    0.95 .. 1  : 9.74849e-05
+
+    min 1.39028e-07 for triangle 427
+    max 0.982509 for triangle 376
+
+Edges:
+    min 0.000301993 for edge 7467 points (1.34585 -0.95215 0.0154578)(1.34592 -0.952443 0.0154755)
+    max 1.25001 for edge 922 points (1.925 0.931826 0.0867693)(0.675 0.935239 0.088413)
+
+Checking for points less than 1e-6 of bounding box ((2.85 4.2 0.904345) metre) apart.
+Found 0 nearby points.
+
+Surface is closed. All edges connected to two faces.
+
+Number of unconnected parts : 1
+
+Number of zones (connected area with consistent normal) : 1
+
+
+End
+

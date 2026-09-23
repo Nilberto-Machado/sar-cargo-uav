@@ -1,0 +1,167 @@
+"""Safe transition: stop, index and lock lift rotors before nacelle tilt."""
+
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtCore
+
+DOC = "CargoUAV_HybridVTOL_VTail_TiltRotor_Animated"
+CG = App.Vector(1350, 0, 0)
+DT = 0.04
+TOTAL = 20.0
+
+
+def smooth(x):
+    x = max(0.0, min(1.0, x))
+    return x * x * (3 - 2 * x)
+
+
+def mix(a, b, s):
+    return a + (b - a) * s
+
+
+class SafeTransitionAnimator(QtCore.QObject):
+    def __init__(self, doc):
+        super().__init__()
+        self.doc = doc
+        self.body = doc.getObject("AircraftAssembly")
+        self.state = doc.getObject("AnimationState")
+        if "RotorLock" not in self.state.PropertiesList:
+            self.state.addProperty("App::PropertyString", "RotorLock", "Safety interlock")
+        if "TiltPermission" not in self.state.PropertiesList:
+            self.state.addProperty("App::PropertyBool", "TiltPermission", "Safety interlock")
+        if "TransitionRule" not in self.state.PropertiesList:
+            self.state.addProperty("App::PropertyString", "TransitionRule", "Safety interlock")
+            self.state.TransitionRule = "Tilt permitted only when VTOL_RPM=0 and RotorLock=LOCKED"
+        self.tilts = [doc.getObject("TiltPod_" + c) for c in ("FL", "FR", "RL", "RR")]
+        self.rotors = [doc.getObject("Rotor_" + c) for c in ("FL", "FR", "RL", "RR")]
+        self.pusher = doc.getObject("Rotor_Pusher")
+        self.signs = (1, -1, -1, 1)
+        self.angles = [0.0] * 4
+        self.index_start = None
+        self.pusher_angle = 0.0
+        self.t = 0.0
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.tick)
+        self.timer.start(int(DT * 1000))
+
+    def state_at(self, t):
+        if t < 2:
+            s = smooth(t / 2)
+            return "VTOL spin-up", 0, 0, 0, 0, int(mix(0, 1600, s)), 0, "UNLOCKED", False
+        if t < 6:
+            s = smooth((t - 2) / 4)
+            return "Vertical takeoff", 0, mix(0, 1500, s), 0, 0, 1600, 0, "UNLOCKED", False
+        if t < 9:
+            s = smooth((t - 6) / 3)
+            return (
+                "Pusher start; lift rotors remain vertical",
+                mix(0, -500, s), mix(1500, 1650, s), mix(0, -3, s),
+                0, 1600, int(mix(0, 5200, s)), "UNLOCKED", False,
+            )
+        if t < 11:
+            s = smooth((t - 9) / 2)
+            return (
+                "Wing loading; VTOL rotors decelerate without tilting",
+                mix(-500, -1200, s), mix(1650, 1750, s), mix(-3, -6, s),
+                0, int(mix(1600, 0, s)), int(mix(5200, 6200, s)), "BRAKING", False,
+            )
+        if t < 12:
+            s = smooth(t - 11)
+            return (
+                "Rotor indexing at zero RPM",
+                mix(-1200, -1350, s), 1750, -6, 0, 0, 6200, "INDEXING", False,
+            )
+        if t < 14:
+            s = smooth((t - 12) / 2)
+            return (
+                "Paddles locked; nacelles permitted to tilt",
+                mix(-1350, -1700, s), 1750, mix(-6, -3, s), mix(0, -90, s),
+                0, int(mix(6200, 6500, s)), "LOCKED", True,
+            )
+        s = smooth((t - 14) / 6)
+        return (
+            "Cruise; lift rotors stopped, indexed and locked",
+            mix(-1700, -3100, s), 1750, mix(-3, 0, min(1, 2 * s)), -90,
+            0, 6500, "LOCKED", True,
+        )
+
+    def tick(self):
+        self.t += DT * max(0.05, float(self.state.AnimationSpeed))
+        if self.t > TOTAL:
+            if self.state.Loop:
+                self.t = 0.0
+                self.angles = [0.0] * 4
+                self.index_start = None
+                self.pusher_angle = 0.0
+            else:
+                self.stop()
+                return
+
+        phase, dx, dz, pitch, tilt_angle, vtol_rpm, pusher_rpm, lock, permit = self.state_at(self.t)
+        body_rot = App.Rotation(App.Vector(0, 1, 0), pitch)
+        self.body.Placement = App.Placement(App.Vector(dx, 0, dz) + CG - body_rot.multVec(CG), body_rot)
+
+        # Hard interlock: no tilt is applied unless RPM is zero and the rotor lock is confirmed.
+        safe_tilt = tilt_angle if (vtol_rpm == 0 and lock == "LOCKED" and permit) else 0.0
+        for pod in self.tilts:
+            pod.Placement.Rotation = App.Rotation(App.Vector(0, 1, 0), safe_tilt)
+
+        if self.t < 11:
+            visual_rpm = min(vtol_rpm, 320)
+            for i, rotor in enumerate(self.rotors):
+                self.angles[i] = (self.angles[i] + self.signs[i] * visual_rpm * 6 * DT) % 360
+                rotor.Placement.Rotation = App.Rotation(App.Vector(0, 0, 1), self.angles[i])
+        elif self.t < 12:
+            if self.index_start is None:
+                self.index_start = list(self.angles)
+            s = smooth(self.t - 11)
+            for i, rotor in enumerate(self.rotors):
+                start = self.index_start[i]
+                target = 90.0 + 360.0 * round((start - 90.0) / 360.0)
+                self.angles[i] = mix(start, target, s)
+                rotor.Placement.Rotation = App.Rotation(App.Vector(0, 0, 1), self.angles[i])
+        else:
+            for i, rotor in enumerate(self.rotors):
+                self.angles[i] = 90.0
+                rotor.Placement.Rotation = App.Rotation(App.Vector(0, 0, 1), 90.0)
+
+        self.pusher_angle = (self.pusher_angle + min(pusher_rpm, 360) * 6 * DT) % 360
+        self.pusher.Placement.Rotation = App.Rotation(App.Vector(1, 0, 0), self.pusher_angle)
+
+        self.state.SimulationTime = self.t
+        self.state.Phase = phase
+        self.state.Altitude = dz
+        self.state.Pitch = pitch
+        self.state.TiltAngle = safe_tilt
+        self.state.VTOL_RPM = int(vtol_rpm)
+        self.state.Pusher_RPM = int(pusher_rpm)
+        self.state.RotorLock = lock
+        self.state.TiltPermission = permit
+        self.doc.recompute()
+        Gui.activeDocument().activeView().redraw()
+
+    def stop(self):
+        self.timer.stop()
+        self.state.Phase = "Stopped"
+        self.doc.recompute()
+
+
+doc = App.ActiveDocument
+if doc is None or doc.Name != DOC:
+    raise RuntimeError("Open CargoUAV_HybridVTOL_VTail_TiltRotor_Animated.FCStd first")
+old = getattr(App, "VTailTiltAnimator", None)
+if old is not None:
+    try:
+        old.stop()
+    except Exception:
+        pass
+old = getattr(App, "SafeTransitionAnimator", None)
+if old is not None:
+    try:
+        old.stop()
+    except Exception:
+        pass
+Gui.activeDocument().activeView().viewAxonometric()
+Gui.activeDocument().activeView().fitAll()
+App.SafeTransitionAnimator = SafeTransitionAnimator(doc)
+

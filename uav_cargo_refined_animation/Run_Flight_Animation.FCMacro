@@ -1,0 +1,1 @@
+exec(open(r"C:\Users\nilbe\.codex\.chatgpt-projects\g-p-6ab2deb0963c8191aae099dcf40ea6da\uav_cargo_refined_animation\animate_flight.py", encoding="utf-8").read())

@@ -1,0 +1,27 @@
+"""Stop the Hybrid VTOL animation and return the aircraft to the ground pose."""
+
+import FreeCAD as App
+import FreeCADGui as Gui
+
+animator = getattr(App, "HybridVTOLAnimator", None)
+if animator is not None:
+    animator.stop()
+
+doc = App.ActiveDocument
+if doc is not None:
+    doc.getObject("AircraftAssembly").Placement = App.Placement()
+    for name in ("Rotor_VTOL_FL", "Rotor_VTOL_FR", "Rotor_VTOL_RL", "Rotor_VTOL_RR", "Rotor_Pusher"):
+        rotor = doc.getObject(name)
+        if rotor is not None:
+            rotor.Placement.Rotation = App.Rotation()
+    state = doc.getObject("AnimationState")
+    if state is not None:
+        state.SimulationTime = 0.0
+        state.Phase = "Stopped at ground"
+        state.Altitude = 0.0
+        state.Pitch = 0.0
+        state.VTOL_RPM = 0
+        state.Pusher_RPM = 0
+    doc.recompute()
+    Gui.activeDocument().activeView().fitAll()
+

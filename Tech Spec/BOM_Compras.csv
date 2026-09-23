@@ -1,0 +1,72 @@
+﻿ID;Categoria;Item;Quantidade;Maturidade;Candidato/modelo;Arquivo Data sheet
+DS-001;Aviónica;Controlador de voo;1;Arquitetura aceita;Holybro Pixhawk 6X;Data sheets/DS-001_controlador_de_voo.md
+DS-002;Aviónica;Computador de missão;1;Arquitetura aceita;Raspberry Pi 5 — 8 GB;Data sheets/DS-002_computador_de_missao.md
+DS-003;Aviónica;Refrigerador do computador;1;Candidato;Raspberry Pi Active Cooler;Data sheets/DS-003_refrigerador_do_computador.md
+DS-004;Aviónica;Módulo GNSS/RTK + magnetômetro;1;Candidato;Holybro H-RTK NEO-F9P + RM3100;Data sheets/DS-004_modulo_gnss_rtk_magnet_metro.md
+DS-005;Aviónica;Sensor de velocidade do ar + pitot;1;Candidato;Holybro MS5525;Data sheets/DS-005_sensor_de_velocidade_do_ar_pitot.md
+DS-006;Aviónica;Altímetro laser;1;Candidato;LightWare SF11/C;Data sheets/DS-006_altimetro_laser.md
+DS-007;Missão;Câmera RGB;1;Candidato;Raspberry Pi Camera Module 3 Wide;Data sheets/DS-007_c_mera_rgb.md
+DS-008;Missão;Câmera térmica;1;Opcional / candidato;Teledyne FLIR Boson 320 ou 640;Data sheets/DS-008_c_mera_termica.md
+DS-009;Aviónica;Armazenamento de missão;2;TBD;microSD High Endurance ou NVMe industrial;Data sheets/DS-009_armazenamento_de_missao.md
+DS-010;Aviónica;Buzzer e localizador;1;TBD;Buzzer ativo + beacon independente;Data sheets/DS-010_buzzer_e_localizador.md
+DS-011;Aviónica;Módulo de relógio RTC;1;TBD;RTC industrial com bateria/supercapacitor;Data sheets/DS-011_modulo_de_relogio_rtc.md
+DS-012;Comunicação;Rádio telemetria de bordo;1;Candidato;RFD900x-BR;Data sheets/DS-012_radio_telemetria_de_bordo.md
+DS-013;Comunicação;Rádio telemetria de solo;1;Candidato;RFD900x-BR USB;Data sheets/DS-013_radio_telemetria_de_solo.md
+DS-014;Comunicação;Conjunto de antenas e cabos RF;1 kit;TBD;Antenas 900 MHz + cabos coaxiais;Data sheets/DS-014_conjunto_de_antenas_e_cabos_rf.md
+DS-015;Comunicação;Modem 4G;1;Candidato;Waveshare SIM7600G-H 4G HAT;Data sheets/DS-015_modem_4g.md
+DS-016;Comunicação;Antenas LTE/GNSS do modem;1 kit;TBD;Antenas compatíveis com SIM7600;Data sheets/DS-016_antenas_lte_gnss_do_modem.md
+DS-017;Propulsão VTOL;Motor elétrico de sustentação;4;Candidato — compra bloqueada;T-Motor U10 II KV100;Data sheets/DS-017_motor_eletrico_de_sustentacao.md
+DS-018;Propulsão VTOL;ESC dos motores de sustentação;4;Candidato — compra bloqueada;T-Motor ALPHA 80A 12S;Data sheets/DS-018_esc_dos_motores_de_sustentacao.md
+DS-019;Propulsão VTOL;Hélice VTOL CW 30×10,5;2 + 1 reserva;Candidato — compra bloqueada;T-Motor G30×10.5 CW;Data sheets/DS-019_helice_vtol_cw_30_10_5.md
+DS-020;Propulsão VTOL;Hélice VTOL CCW 30×10,5;2 + 1 reserva;Candidato — compra bloqueada;T-Motor G30×10.5 CCW;Data sheets/DS-020_helice_vtol_ccw_30_10_5.md
+DS-021;Tilt-rotor;Atuador de inclinação da nacele;4;TBD crítico;Atuador eletromecânico industrial com feedback absoluto;Data sheets/DS-021_atuador_de_inclinacao_da_nacele.md
+DS-022;Tilt-rotor;Trava mecânica da nacele;4;TBD crítico;Pino/trava fail-safe com sensor duplo;Data sheets/DS-022_trava_mec_nica_da_nacele.md
+DS-023;Tilt-rotor;Sensor de indexação/parada da hélice;4;TBD crítico;Encoder/Hall redundante;Data sheets/DS-023_sensor_de_indexacao_parada_da_helice.md
+DS-024;Tilt-rotor;Mancais e eixo do pivô;4 kits;TBD crítico;Rolamentos selados + eixo 7075/aço;Data sheets/DS-024_mancais_e_eixo_do_piv.md
+DS-025;Propulsão cruzeiro;Motor a gasolina pusher;1;Candidato — compra bloqueada;DLE35RA;Data sheets/DS-025_motor_a_gasolina_pusher.md
+DS-026;Propulsão cruzeiro;Hélice pusher;2;TBD crítico;19×8 ou 20×8 pusher compatível;Data sheets/DS-026_helice_pusher.md
+DS-027;Propulsão cruzeiro;Servo de aceleração;1;TBD;Servo HV metal gear;Data sheets/DS-027_servo_de_aceleracao.md
+DS-028;Propulsão cruzeiro;Módulo de corte da ignição;1;TBD crítico;Kill switch optoisolado;Data sheets/DS-028_modulo_de_corte_da_ignicao.md
+DS-029;Propulsão cruzeiro;Sensor de RPM do motor térmico;1;TBD;Sensor Hall/óptico isolado;Data sheets/DS-029_sensor_de_rpm_do_motor_termico.md
+DS-030;Propulsão cruzeiro;Motor elétrico starter-generator;1;TBD crítico;BLDC dimensionado para partida e geração;Data sheets/DS-030_motor_eletrico_starter_generator.md
+DS-031;Propulsão cruzeiro;Controlador bidirecional starter-generator;1;TBD crítico;Inversor/retificador BLDC bidirecional;Data sheets/DS-031_controlador_bidirecional_starter_generator.md
+DS-032;Propulsão cruzeiro;Embreagem/roda livre e transmissão;1 kit;TBD crítico;Roda livre + correia/engrenagem;Data sheets/DS-032_embreagem_roda_livre_e_transmissao.md
+DS-033;Combustível;Tanque ou bladder de combustível;1;TBD crítico;Capacidade geométrica inicial 4 L;Data sheets/DS-033_tanque_ou_bladder_de_combustivel.md
+DS-034;Combustível;Kit de linhas, filtro, clunk e respiro;1 kit;TBD;Componentes compatíveis com gasolina;Data sheets/DS-034_kit_de_linhas_filtro_clunk_e_respiro.md
+DS-035;Combustível;Válvula de corte de combustível;1;TBD crítico;Válvula fail-safe compatível com gasolina;Data sheets/DS-035_valvula_de_corte_de_combustivel.md
+DS-036;Combustível;Sensor de nível/fluxo de combustível;1;TBD;Sensor compatível com gasolina;Data sheets/DS-036_sensor_de_nivel_fluxo_de_combustivel.md
+DS-037;Energia;Célula Li-ion 21700;48;Candidato — compra bloqueada;"Molicel INR-21700-P45B; pack conceitual 12S4P";Data sheets/DS-037_celula_li_ion_21700.md
+DS-038;Energia;BMS/monitor de células 12S;1;TBD crítico;BMS aeronáutico ou monitor independente;Data sheets/DS-038_bms_monitor_de_celulas_12s.md
+DS-039;Energia;Contator principal HV;1;TBD crítico;Contator DC ≥60 V;Data sheets/DS-039_contator_principal_hv.md
+DS-040;Energia;Circuito de pré-carga;1;TBD crítico;Resistor + relé/contator de pré-carga;Data sheets/DS-040_circuito_de_pre_carga.md
+DS-041;Energia;Fusível principal HV;1 + 2 reservas;TBD crítico;Fusível DC aeronáutico/EV;Data sheets/DS-041_fusivel_principal_hv.md
+DS-042;Energia;Distribuidor/barramento de potência HV;1;Sob medida;PDB/busbar 12S;Data sheets/DS-042_distribuidor_barramento_de_pot_ncia_hv.md
+DS-043;Energia;Módulo de medição de potência;1;Candidato;Holybro PM08-CAN ou solução equivalente;Data sheets/DS-043_modulo_de_medicao_de_pot_ncia.md
+DS-044;Energia;Conversor DC/DC 5 V 5 A isolado;2;TBD crítico;Conversores industriais redundantes;Data sheets/DS-044_conversor_dc_dc_5_v_5_a_isolado.md
+DS-045;Energia;Conversor DC/DC 12 V;1;TBD;Conversor industrial 12S→12 V;Data sheets/DS-045_conversor_dc_dc_12_v.md
+DS-046;Energia;Bateria reserva de aviónica;1;TBD crítico;Pack LiFePO4 independente;Data sheets/DS-046_bateria_reserva_de_avionica.md
+DS-047;Energia;Módulo ideal-diode/OR-ing;1;TBD crítico;OR-ing de duas fontes;Data sheets/DS-047_modulo_ideal_diode_or_ing.md
+DS-048;Energia;Conectores antifaísca HV;1 kit;TBD;AS150 ou equivalente qualificado;Data sheets/DS-048_conectores_antifaisca_hv.md
+DS-049;Energia;Cabos de potência e sinal;1 lote;TBD;Cabos flexíveis aeronáuticos;Data sheets/DS-049_cabos_de_pot_ncia_e_sinal.md
+DS-050;Energia;Sensores de temperatura;8;TBD;NTC/PT1000 digitais/analógicos;Data sheets/DS-050_sensores_de_temperatura.md
+DS-051;Controles;Servo de aileron HV;2 + 1 reserva;TBD crítico;Servo digital industrial metal gear;Data sheets/DS-051_servo_de_aileron_hv.md
+DS-052;Controles;Servo de ruddervator da cauda V;2 + 1 reserva;TBD crítico;Servo digital industrial metal gear;Data sheets/DS-052_servo_de_ruddervator_da_cauda_v.md
+DS-053;Controles;Servo de porta/liberação de carga;1;TBD;Servo ou atuador com trava;Data sheets/DS-053_servo_de_porta_liberacao_de_carga.md
+DS-054;Controles;Hinges, horns e pushrods;1 kit;TBD;Ferragens aeronáuticas;Data sheets/DS-054_hinges_horns_e_pushrods.md
+DS-055;Estrutura;Longarinas/tubos de fibra de carbono;1 lote;TBD crítico;Tubos/pultrudados com certificado;Data sheets/DS-055_longarinas_tubos_de_fibra_de_carbono.md
+DS-056;Estrutura;Tecido de carbono e epóxi;1 lote;TBD;Sistema laminado aeronáutico;Data sheets/DS-056_tecido_de_carbono_e_epoxi.md
+DS-057;Estrutura;Núcleo de espuma/honeycomb;1 lote;TBD;PVC estrutural ou honeycomb;Data sheets/DS-057_nucleo_de_espuma_honeycomb.md
+DS-058;Estrutura;Compensado aeronáutico/firewall;1 lote;TBD crítico;Compensado birch aeronáutico;Data sheets/DS-058_compensado_aeronautico_firewall.md
+DS-059;Estrutura;Perfis/chapas de alumínio 7075-T6;1 lote;TBD crítico;Material com certificado;Data sheets/DS-059_perfis_chapas_de_aluminio_7075_t6.md
+DS-060;Estrutura;Fixadores e porcas travantes;1 lote;TBD;Classe aeronáutica, tamanhos por desenho;Data sheets/DS-060_fixadores_e_porcas_travantes.md
+DS-061;Estrutura;Coxins antivibração;1 kit;TBD;Isoladores motor/aviónica;Data sheets/DS-061_coxins_antivibracao.md
+DS-062;Estrutura;Trem de pouso/skids;1 conjunto;TBD crítico;Compósito/alumínio absorvente;Data sheets/DS-062_trem_de_pouso_skids.md
+DS-063;Estrutura;Proteção térmica e corta-fogo;1 kit;TBD crítico;Manta/barreira compatível com gasolina;Data sheets/DS-063_protecao_termica_e_corta_fogo.md
+DS-064;Segurança;Sistema de paraquedas;1;TBD crítico;Fruity Chutes ou equivalente dimensionado pelo MTOW;Data sheets/DS-064_sistema_de_paraquedas.md
+DS-065;Segurança;Controlador de terminação/recuperação;1;TBD crítico;Controlador independente;Data sheets/DS-065_controlador_de_terminacao_recuperacao.md
+DS-066;Segurança;Luzes de navegação e anticolisão;1 kit;TBD;LEDs aeronáuticos de alta intensidade;Data sheets/DS-066_luzes_de_navegacao_e_anticolisao.md
+DS-067;Solo;Carregador/balanceador 12S;1;TBD crítico;Carregador CC/CV com logging;Data sheets/DS-067_carregador_balanceador_12s.md
+DS-068;Solo;Gabinete de armazenamento de baterias;1;TBD crítico;Armário resistente ao fogo ventilado;Data sheets/DS-068_gabinete_de_armazenamento_de_baterias.md
+DS-069;Solo;Bancada de empuxo e célula de carga;1;TBD crítico;Bancada ≥15 kgf por motor;Data sheets/DS-069_bancada_de_empuxo_e_celula_de_carga.md
+DS-070;Solo;Tacômetro e instrumentos elétricos;1 kit;TBD;Tacômetro óptico + analisador DC;Data sheets/DS-070_tac_metro_e_instrumentos_eletricos.md
+DS-071;Solo;Estação de controle em solo;1;TBD;Notebook robusto com Mission Planner/QGroundControl;Data sheets/DS-071_estacao_de_controle_em_solo.md

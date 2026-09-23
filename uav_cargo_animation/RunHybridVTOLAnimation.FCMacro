@@ -1,0 +1,127 @@
+"""Animate takeoff, transition and cruise in CargoUAV_HybridVTOL_Animated.FCStd."""
+
+import math
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtCore
+
+DOC_NAME = "CargoUAV_HybridVTOL_Animated"
+CG = App.Vector(1350, 0, 0)
+DT = 0.04
+TOTAL_TIME = 16.0
+
+
+def smooth01(x):
+    x = max(0.0, min(1.0, x))
+    return x * x * (3.0 - 2.0 * x)
+
+
+def lerp(a, b, s):
+    return a + (b - a) * s
+
+
+class HybridVTOLAnimator(QtCore.QObject):
+    def __init__(self, doc):
+        super().__init__()
+        self.doc = doc
+        self.state = doc.getObject("AnimationState")
+        self.assembly = doc.getObject("AircraftAssembly")
+        self.vtol = [
+            doc.getObject("Rotor_VTOL_FL"), doc.getObject("Rotor_VTOL_FR"),
+            doc.getObject("Rotor_VTOL_RL"), doc.getObject("Rotor_VTOL_RR"),
+        ]
+        self.pusher = doc.getObject("Rotor_Pusher")
+        self.directions = (1, -1, -1, 1)
+        self.vtol_angles = [0.0, 0.0, 0.0, 0.0]
+        self.pusher_angle = 0.0
+        self.t = 0.0
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.tick)
+        self.timer.start(int(DT * 1000))
+
+    def flight_state(self, t):
+        if t < 2.0:
+            s = smooth01(t / 2.0)
+            return "VTOL spin-up", 0.0, 0.0, 0.0, lerp(0, 1600, s), 0, 0.0, 0.0
+        if t < 6.0:
+            s = smooth01((t - 2.0) / 4.0)
+            return "Vertical takeoff", 0.0, lerp(0, 1500, s), 0.0, 1600, 0, 0.0, 6.0
+        if t < 10.0:
+            s = smooth01((t - 6.0) / 4.0)
+            return (
+                "Transition — pusher start and wing loading",
+                lerp(0, -1200, s), lerp(1500, 1700, s), lerp(0, -7, s),
+                int(lerp(1600, 250, s)), int(lerp(0, 6000, s)), 15.0, 1.0,
+            )
+        s = smooth01((t - 10.0) / 6.0)
+        return (
+            "Wing-borne cruise — VTOL rotors parked",
+            lerp(-1200, -2800, s), 1700, lerp(-7, 0, min(s * 2, 1)),
+            0, 6500, 21.0, 0.0,
+        )
+
+    def tick(self):
+        speed = max(0.05, float(self.state.AnimationSpeed))
+        self.t += DT * speed
+        if self.t > TOTAL_TIME:
+            if self.state.Loop:
+                self.t = 0.0
+                self.vtol_angles = [0.0] * 4
+                self.pusher_angle = 0.0
+            else:
+                self.stop()
+                return
+
+        phase, dx, dz, pitch, vtol_rpm, pusher_rpm, fwd_ms, vert_ms = self.flight_state(self.t)
+        body_rot = App.Rotation(App.Vector(0, 1, 0), pitch)
+        body_base = App.Vector(dx, 0, dz) + CG - body_rot.multVec(CG)
+        self.assembly.Placement = App.Placement(body_base, body_rot)
+
+        # Rotation is visually slowed to avoid frame-rate aliasing; RPM properties show commanded values.
+        visual_vtol_rpm = min(vtol_rpm, 320)
+        for i, rotor in enumerate(self.vtol):
+            if vtol_rpm == 0:
+                self.vtol_angles[i] = 0.0
+            else:
+                self.vtol_angles[i] = (
+                    self.vtol_angles[i] + self.directions[i] * visual_vtol_rpm * 6.0 * DT
+                ) % 360.0
+            rotor.Placement.Rotation = App.Rotation(App.Vector(0, 0, 1), self.vtol_angles[i])
+
+        visual_pusher_rpm = min(pusher_rpm, 360)
+        self.pusher_angle = (self.pusher_angle + visual_pusher_rpm * 6.0 * DT) % 360.0
+        self.pusher.Placement.Rotation = App.Rotation(App.Vector(1, 0, 0), self.pusher_angle)
+
+        self.state.SimulationTime = self.t
+        self.state.Phase = phase
+        self.state.Altitude = dz
+        self.state.Pitch = pitch
+        self.state.VTOL_RPM = int(vtol_rpm)
+        self.state.Pusher_RPM = int(pusher_rpm)
+        self.state.ForwardSpeed = fwd_ms * 1000.0
+        self.state.VerticalSpeed = vert_ms * 1000.0
+        self.doc.recompute()
+        Gui.activeDocument().activeView().redraw()
+
+    def stop(self):
+        self.timer.stop()
+        self.state.Phase = "Stopped"
+        self.doc.recompute()
+
+
+doc = App.ActiveDocument
+if doc is None or doc.Name != DOC_NAME:
+    raise RuntimeError("Open CargoUAV_HybridVTOL_Animated.FCStd before running this macro")
+
+old = getattr(App, "HybridVTOLAnimator", None)
+if old is not None:
+    try:
+        old.stop()
+    except Exception:
+        pass
+
+doc.getObject("AircraftAssembly").Placement = App.Placement()
+Gui.activeDocument().activeView().viewAxonometric()
+Gui.activeDocument().activeView().fitAll()
+App.HybridVTOLAnimator = HybridVTOLAnimator(doc)
+

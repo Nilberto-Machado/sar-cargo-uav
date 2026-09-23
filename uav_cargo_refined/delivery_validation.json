@@ -1,0 +1,32 @@
+{
+  "fcstd": {
+    "valid": true,
+    "closed": true,
+    "solids": 1,
+    "bbox_mm": [
+      2950.0,
+      4200.0,
+      942.7131016810822
+    ]
+  },
+  "step": {
+    "valid": true,
+    "closed": true,
+    "solids": 1,
+    "bbox_mm": [
+      2950.0,
+      4200.0,
+      942.7131016809899
+    ]
+  },
+  "stl": {
+    "facets": 27212,
+    "points": 13608,
+    "solid": true,
+    "bbox_mm": [
+      2950.0,
+      4200.0,
+      939.3113098144531
+    ]
+  }
+}

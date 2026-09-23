@@ -1,0 +1,11 @@
+FoamFile { format ascii; class volScalarField; object k; }
+dimensions [turbulentKineticEnergy];
+internalField uniform 0.09375;
+boundaryField
+{
+    inlet { type fixedValue; value uniform 0.09375; }
+    outlet { type inletOutlet; inletValue uniform 0.09375; value uniform 0.09375; }
+    farfield { type zeroGradient; }
+    aircraftGroup { type kqRWallFunction; value uniform 0.09375; }
+}
+

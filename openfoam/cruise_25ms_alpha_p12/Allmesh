@@ -1,0 +1,9 @@
+#!/bin/sh
+cd "$(dirname "$0")" || exit 1
+. "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+runApplication surfaceCheck constant/geometry/CargoUAV_cruise_m.stl
+runApplication surfaceFeatures
+runApplication blockMesh
+runApplication snappyHexMesh -overwrite
+runApplication checkMesh -allGeometry -allTopology
+

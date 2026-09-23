@@ -1,0 +1,16 @@
+type forceCoeffs;
+libs ("libforces.so");
+writeControl timeStep;
+timeInterval 1;
+log yes;
+patches (aircraftGroup);
+rho rhoInf;
+rhoInf 1.225;
+liftDir (0 0 1);
+dragDir (1 0 0);
+CofR (1.07 0 0);
+pitchAxis (0 1 0);
+magUInf 25;
+lRef 0.6415;
+Aref 2.604;
+

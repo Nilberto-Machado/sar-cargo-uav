@@ -1,0 +1,72 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : surfaceFeatures
+Date   : Sep 22 2026
+Time   : 19:05:58
+Host   : "V4"
+PID    : 1274
+I/O    : uncollated
+Case   : /mnt/c/Users/nilbe/.codex/.chatgpt-projects/g-p-6ab2deb0963c8191aae099dcf40ea6da/openfoam/cruise_25ms_alpha0
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading "surfaceFeaturesDict"
+
+Surface            : "CargoUAV_cruise_m.stl"
+
+
+Feature line extraction is only valid on closed manifold surfaces.
+Statistics:
+Triangles    : 10258
+Vertices     : 5131
+Bounding Box : (0 -2.1 -0.3165101) (2.85 2.1 0.5878346)
+
+
+Constructing feature set from included angle 2.617994
+Selecting edges purely based on geometric tests: no
+Removing all non-manifold edges (edges with > 2 connected faces) unless they cross multiple regions
+
+Initial feature set:
+    feature points : 38
+    feature edges  : 3205
+    of which
+        region edges   : 0
+        external edges : 1607
+        internal edges : 1598
+
+
+Final feature set:
+points      : 3191
+edges       : 3205
+boundingBox : (0 -2.1 -0.01860308) (2.85 2.1 0.5878346)
+point classification :
+    convex feature points          :       14
+    concave feature points         :        2
+    mixed feature points           :       22
+    other (non-feature) points     :     3153
+edge classification :
+    external (convex angle) edges  :     1607
+    internal (concave angle) edges :     1598
+    flat region edges              :        0
+    open edges                     :        0
+    multiply connected edges       :        0
+
+Writing extendedFeatureEdgeMesh to "constant/extendedFeatureEdgeMesh/CargoUAV_cruise_m.extendedFeatureEdgeMesh"
+
+Writing featureEdgeMesh to "constant/geometry/CargoUAV_cruise_m.eMesh"
+
+ExecutionTime = 0.045949 s  ClockTime = 1 s
+
+End
+

@@ -1,0 +1,10 @@
+FoamFile { format ascii; class dictionary; object surfaceFeaturesDict; }
+
+surfaces ("CargoUAV_cruise_m.stl");
+includedAngle 150;
+subsetFeatures
+{
+    nonManifoldEdges no;
+    openEdges yes;
+}
+

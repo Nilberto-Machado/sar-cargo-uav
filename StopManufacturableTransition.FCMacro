@@ -1,0 +1,32 @@
+import FreeCAD as App
+import FreeCADGui as Gui
+
+anim = getattr(App, "ManufacturableAnimator", None)
+if anim is not None:
+    anim.stop()
+doc = App.ActiveDocument
+if doc:
+    doc.getObject("AircraftAssembly").Placement = App.Placement()
+    for code in ("FL", "FR", "RL", "RR"):
+        doc.getObject("TiltPod_" + code).Placement.Rotation = App.Rotation()
+        doc.getObject("Rotor_" + code).Placement.Rotation = App.Rotation()
+    doc.getObject("Rotor_Pusher").Placement.Rotation = App.Rotation()
+    state = doc.getObject("AnimationState")
+    state.SimulationTime = 0
+    state.Phase = "Stopped at ground"
+    state.Altitude = 0
+    state.Pitch = 0
+    state.TiltAngle = 0
+    state.VTOL_RPM = 0
+    state.Pusher_RPM = 0
+    if "FrontTilt" in state.PropertiesList:
+        state.FrontTilt = 0
+    if "RearTilt" in state.PropertiesList:
+        state.RearTilt = 0
+    if "RotorLock" in state.PropertiesList:
+        state.RotorLock = "UNLOCKED"
+    if "TiltPermission" in state.PropertiesList:
+        state.TiltPermission = False
+    doc.recompute()
+    Gui.activeDocument().activeView().fitAll()
+

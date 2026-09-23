@@ -1,0 +1,11 @@
+FoamFile { format ascii; class volScalarField; object p; }
+dimensions [kinematicPressure];
+internalField uniform 0;
+boundaryField
+{
+    inlet { type zeroGradient; }
+    outlet { type fixedValue; value uniform 0; }
+    farfield { type zeroGradient; }
+    aircraftGroup { type zeroGradient; }
+}
+
