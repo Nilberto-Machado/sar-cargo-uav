@@ -1,0 +1,80 @@
+FoamFile { format ascii; class dictionary; object controlDict; }
+
+solver          incompressibleFluid;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         1500;
+deltaT          1;
+writeControl    timeStep;
+writeInterval   100;
+purgeWrite      3;
+writeFormat     binary;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+
+functions
+{
+    #includeFunc forceCoeffs
+
+    residuals
+    {
+        type            residuals;
+        libs            ("libutilityFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          (p U k omega);
+    }
+
+    yPlus
+    {
+        type            yPlus;
+        libs            ("libfieldFunctionObjects.so");
+        executeControl  timeStep;
+        executeInterval 25;
+        writeControl    timeStep;
+        writeInterval   25;
+    }
+
+    yPlusAverage
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   25;
+        log             yes;
+        writeFields     no;
+        patch           aircraft;
+        operation       areaAverage;
+        fields          (yPlus);
+    }
+
+    yPlusMin
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   25;
+        log             yes;
+        writeFields     no;
+        patch           aircraft;
+        operation       min;
+        fields          (yPlus);
+    }
+
+    yPlusMax
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   25;
+        log             yes;
+        writeFields     no;
+        patch           aircraft;
+        operation       max;
+        fields          (yPlus);
+    }
+}

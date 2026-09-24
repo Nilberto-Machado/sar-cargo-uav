@@ -1,0 +1,13 @@
+cases/*/constant/polyMesh/
+cases/*/constant/extendedFeatureEdgeMesh/
+cases/*/constant/geometry/*.eMesh
+cases/*/constant/geometry/*.stl
+cases/*/processor*/
+cases/*/postProcessing/
+cases/*/0/
+cases/*/[1-9]*/
+cases/*/log.*
+cases/*/NO_PRISM_LAYERS
+results/*.csv
+results/*.md
+!results/README.md

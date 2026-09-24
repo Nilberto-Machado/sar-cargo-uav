@@ -1,0 +1,75 @@
+FoamFile { format ascii; class dictionary; object snappyHexMeshDict; }
+
+castellatedMesh true;
+snap true;
+addLayers true;
+geometry
+{
+    aircraft { type triSurface; file "CargoUAV_cruise_m.stl"; }
+    wingRefinement { type box; min (0.35 -2.30 -0.35); max (2.20 2.30 0.45); }
+    fuselageRefinement { type box; min (-0.10 -0.55 -0.45); max (2.95 0.55 0.70); }
+    tailRefinement { type box; min (1.90 -1.30 -0.45); max (3.00 1.30 0.70); }
+    nearWake { type box; min (0.00 -2.50 -1.00); max (8.00 2.50 1.50); }
+}
+castellatedMeshControls
+{
+    maxLocalCells 3000000;
+    maxGlobalCells 3000000;
+    minRefinementCells 10;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 3;
+    features ({ file "CargoUAV_cruise_m.eMesh"; level 6; });
+    refinementSurfaces
+    {
+        aircraft { level (5 5); patchInfo { type wall; inGroups (aircraftGroup); } }
+    }
+    resolveFeatureAngle 30;
+    refinementRegions
+    {
+        wingRefinement { mode inside; levels ((1e15 5)); }
+        fuselageRefinement { mode inside; levels ((1e15 5)); }
+        tailRefinement { mode inside; levels ((1e15 5)); }
+        nearWake { mode inside; levels ((1e15 3)); }
+    }
+    locationInMesh (10 0 5);
+    allowFreeStandingZoneFaces true;
+}
+snapControls
+{
+    nSmoothPatch 5;
+    tolerance 2.0;
+    nSolveIter 50;
+    nRelaxIter 8;
+    nFeatureSnapIter 20;
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+addLayersControls
+{
+    relativeSizes false;
+    layers { aircraft { nSurfaceLayers 14; } }
+    expansionRatio 1.25;
+    firstLayerThickness 1.2e-5;
+    minThickness 3e-6;
+    nGrow 0;
+    featureAngle 130;
+    slipFeatureAngle 30;
+    nRelaxIter 5;
+    nSmoothSurfaceNormals 3;
+    nSmoothNormals 5;
+    nSmoothThickness 15;
+    maxFaceThicknessRatio 1.0;
+    maxThicknessToMedialRatio 0.5;
+    minMedialAxisAngle 20;
+    nBufferCellsNoExtrude 1;
+    nLayerIter 50;
+}
+meshQualityControls
+{
+    #include "meshQualityDict"
+    relaxed { maxNonOrtho 75; }
+    nSmoothScale 4;
+    errorReduction 0.75;
+}
+mergeTolerance 1e-6;

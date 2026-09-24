@@ -1,0 +1,51 @@
+#!/bin/sh
+set -eu
+
+cd "$(dirname "$0")"
+
+if [ -z "${WM_PROJECT_DIR:-}" ]; then
+    echo "OpenFOAM environment is not loaded. Source /opt/openfoam14/etc/bashrc first." >&2
+    exit 2
+fi
+
+run_logged()
+{
+    name="$1"
+    shift
+    echo "+ $*"
+    if "$@" >"log.$name" 2>&1; then
+        tail -n 12 "log.$name"
+    else
+        cat "log.$name" >&2
+        return 1
+    fi
+}
+
+levels="${*:-coarse medium fine}"
+for level in $levels; do
+    case "$level" in
+        coarse|medium|fine) ;;
+        *) echo "Unknown mesh level: $level" >&2; exit 2 ;;
+    esac
+    echo "=== Running $level ==="
+    if [ ! -d "cases/$level/constant/polyMesh" ]; then
+        ./Allmesh "$level"
+    fi
+    if [ -f "cases/$level/NO_PRISM_LAYERS" ] && [ "${ALLOW_NO_LAYERS:-0}" != "1" ]; then
+        echo "Refusing to solve $level: the mesh retained zero prism layers." >&2
+        echo "Fix layer generation, or set ALLOW_NO_LAYERS=1 only for diagnostics." >&2
+        exit 3
+    fi
+    (
+        cd "cases/$level"
+        rm -rf 0
+        cp -a 0.orig 0
+        run_logged potentialFoam potentialFoam
+        run_logged decomposePar decomposePar -force
+        run_logged foamRun mpirun --oversubscribe -np 10 foamRun -parallel
+        run_logged reconstructPar reconstructPar -latestTime
+        run_logged yPlus foamPostProcess -solver incompressibleFluid -func yPlus -latestTime
+    )
+done
+
+python3 scripts/extract_results.py

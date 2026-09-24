@@ -1,0 +1,61 @@
+#!/bin/sh
+set -eu
+
+cd "$(dirname "$0")"
+
+if [ -z "${WM_PROJECT_DIR:-}" ]; then
+    echo "OpenFOAM environment is not loaded. Source /opt/openfoam14/etc/bashrc first." >&2
+    exit 2
+fi
+
+run_logged()
+{
+    name="$1"
+    shift
+    echo "+ $*"
+    if "$@" >"log.$name" 2>&1; then
+        tail -n 12 "log.$name"
+    else
+        cat "log.$name" >&2
+        return 1
+    fi
+}
+
+levels="${*:-coarse medium fine}"
+for level in $levels; do
+    case "$level" in
+        coarse|medium|fine) ;;
+        *) echo "Unknown mesh level: $level" >&2; exit 2 ;;
+    esac
+    echo "=== Meshing $level ==="
+    case_dir="cases/$level"
+    mkdir -p "$case_dir/constant/geometry"
+    cp -f geometry/CargoUAV_cruise_m.stl "$case_dir/constant/geometry/"
+    (
+        cd "$case_dir"
+        rm -rf constant/polyMesh constant/extendedFeatureEdgeMesh
+        rm -f constant/geometry/CargoUAV_cruise_m.eMesh
+        run_logged surfaceCheck surfaceCheck constant/geometry/CargoUAV_cruise_m.stl
+        run_logged surfaceFeatures surfaceFeatures
+        run_logged blockMesh blockMesh
+        run_logged snappyHexMesh snappyHexMesh -overwrite
+        layer_line=$(grep '^aircraft[[:space:]]' log.snappyHexMesh | tail -n 1 || true)
+        actual_layers=$(printf '%s\n' "$layer_line" | awk '{print $3}')
+        printf '%s\n' "$layer_line" > log.layerSummary
+        if [ -z "$actual_layers" ] || [ "$actual_layers" = "0" ]; then
+            : > NO_PRISM_LAYERS
+            echo "WARNING: snappyHexMesh retained zero prism layers; the solver run will be blocked."
+        else
+            rm -f NO_PRISM_LAYERS
+            echo "Retained prism layers: $actual_layers"
+        fi
+        run_logged checkMesh checkMesh
+        grep -q "Mesh OK" log.checkMesh
+        if checkMesh -allGeometry -allTopology >log.checkMesh.full 2>&1; then
+            tail -n 12 log.checkMesh.full
+        else
+            echo "Strict checkMesh reported additional topology/geometry warnings; see log.checkMesh.full."
+            tail -n 12 log.checkMesh.full
+        fi
+    )
+done

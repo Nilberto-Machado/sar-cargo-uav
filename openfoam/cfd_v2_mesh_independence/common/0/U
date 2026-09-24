@@ -1,0 +1,29 @@
+FoamFile { format ascii; class volVectorField; object U; }
+
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (24.939101 0 1.743912);
+boundaryField
+{
+    inlet
+    {
+        type        fixedValue;
+        value       uniform (24.939101 0 1.743912);
+    }
+    outlet
+    {
+        type        inletOutlet;
+        inletValue  uniform (24.939101 0 1.743912);
+        value       uniform (24.939101 0 1.743912);
+    }
+    farfield
+    {
+        type            freestreamVelocity;
+        freestreamValue uniform (24.939101 0 1.743912);
+        value           uniform (24.939101 0 1.743912);
+    }
+    aircraft
+    {
+        type        noSlip;
+    }
+}
+
