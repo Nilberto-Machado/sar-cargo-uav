@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+cd "$(dirname "$0")"
+. /opt/openfoam14/etc/bashrc
+. "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+set -u
+
+runApplication surfaceCheck constant/geometry/CargoUAV_manufacturable_m.stl
+runApplication surfaceFeatures
+runApplication blockMesh
+runApplication snappyHexMesh -overwrite
+runApplication checkMesh

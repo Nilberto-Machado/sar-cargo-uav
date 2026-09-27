@@ -20,19 +20,19 @@ FoamFile
     {
         type            patch;
         nFaces          1120;
-        startFace       487451;
+        startFace       486794;
     }
     outlet
     {
         type            patch;
         nFaces          1120;
-        startFace       488571;
+        startFace       487914;
     }
     farfield
     {
         type            patch;
         nFaces          7072;
-        startFace       489691;
+        startFace       489034;
     }
     aircraft
     {
@@ -44,8 +44,8 @@ aircraftGroup
 wall
 )
 ;
-        nFaces          9818;
-        startFace       496763;
+        nFaces          9819;
+        startFace       496106;
     }
 )
 

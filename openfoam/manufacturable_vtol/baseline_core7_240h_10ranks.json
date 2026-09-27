@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-27",
+  "host_cpu": "Intel Core 7 240H",
+  "host_cores": 10,
+  "host_logical_processors": 16,
+  "wsl_visible_cores": 8,
+  "wsl_visible_threads": 16,
+  "memory_gib": 15,
+  "environment": "WSL2 Ubuntu 22.04",
+  "openfoam_version": 14,
+  "mpi_ranks": 10,
+  "cells": 160471,
+  "iterations": 1500,
+  "solver_execution_time_s": 194.22101,
+  "solver_clock_time_s": 254,
+  "iterations_per_second": 5.905511811,
+  "seconds_per_iteration": 0.169333333,
+  "cell_iterations_per_second": 947663.386,
+  "last_100": {
+    "Cd_mean": 0.045820867776,
+    "Cd_stddev": 0.000508717962,
+    "Cl_mean": 0.28002230683,
+    "Cl_stddev": 0.006313192591,
+    "Cm_mean": -0.029069971958,
+    "Cm_stddev": 0.006475988309
+  },
+  "y_plus": {
+    "min": 18.479681,
+    "max": 379.02187,
+    "area_average_solver": 129.94332,
+    "area_average_postprocess": 134.64893
+  }
+}

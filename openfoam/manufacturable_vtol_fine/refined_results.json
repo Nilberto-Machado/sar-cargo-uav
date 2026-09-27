@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-27",
+  "openfoam_version": 14,
+  "mpi_ranks": 10,
+  "cells": 495958,
+  "aircraft_patch_faces": 39474,
+  "iterations": 1500,
+  "solver_execution_time_s": 573.62828,
+  "solver_clock_time_s": 634,
+  "iterations_per_second": 2.365930599,
+  "cell_iterations_per_second": 1173402.208,
+  "mesh_quality": {
+    "max_non_orthogonality_deg": 51.11835,
+    "mean_non_orthogonality_deg": 8.0408304,
+    "max_skewness": 2.5241361,
+    "max_aspect_ratio": 5.5024625,
+    "check_mesh": "Mesh OK"
+  },
+  "last_100": {
+    "Cd_mean": 0.029255230742,
+    "Cd_stddev": 0.000002237648,
+    "Cl_mean": 0.30372245341,
+    "Cl_stddev": 0.00002677655,
+    "Cm_mean": -0.013719781318,
+    "Cm_stddev": 0.000014281479
+  },
+  "y_plus": {
+    "min": 13.578388,
+    "max": 164.37369,
+    "area_average_solver": 91.309321,
+    "area_average_postprocess": 94.78451
+  }
+}

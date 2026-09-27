@@ -62,7 +62,7 @@ snapControls
     nRelaxIter 5;
     nFeatureSnapIter 15;
     implicitFeatureSnap false;
-    explicitFeatureSnap true;
+    explicitFeatureSnap false;
     multiRegionFeatureSnap false;
 }
 

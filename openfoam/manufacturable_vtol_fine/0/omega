@@ -1,0 +1,12 @@
+FoamFile { format ascii; class volScalarField; object omega; }
+
+dimensions      [0 0 -1 0 0 0 0];
+internalField   uniform 12.5;
+boundaryField
+{
+    inlet       { type fixedValue; value uniform 12.5; }
+    outlet      { type inletOutlet; inletValue uniform 12.5; value uniform 12.5; }
+    farfield    { type inletOutlet; inletValue uniform 12.5; value uniform 12.5; }
+    aircraft    { type omegaWallFunction; value uniform 12.5; }
+}
+

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+cd "$(dirname "$0")"
+. /opt/openfoam14/etc/bashrc
+. "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+set -u
+
+if [ ! -d constant/polyMesh ]; then
+    ./Allmesh
+fi
+
+rm -rf 0 processor*
+rm -f log.potentialFoam log.decomposePar log.foamRun log.reconstructPar log.foamPostProcess
+cp -a 0.orig 0
+potentialFoam > log.potentialFoam 2>&1
+decomposePar -force > log.decomposePar 2>&1
+echo "Running foamRun in parallel with 10 oversubscribed ranks"
+mpirun --oversubscribe -np 10 foamRun -parallel > log.foamRun 2>&1
+reconstructPar -latestTime > log.reconstructPar 2>&1
+foamPostProcess -solver incompressibleFluid -func yPlus -latestTime > log.foamPostProcess 2>&1

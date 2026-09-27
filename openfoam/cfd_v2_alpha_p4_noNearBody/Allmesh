@@ -1,9 +1,29 @@
 #!/bin/sh
+set -e
+
 cd "$(dirname "$0")" || exit 1
 . "$WM_PROJECT_DIR/bin/tools/RunFunctions"
+
+echo "========================================="
+echo " OpenFOAM 14 mesh generation - 6 processes"
+echo "========================================="
+
+# Limpeza da decomposição anterior
+rm -rf processor*
+
 runApplication surfaceCheck constant/geometry/CargoUAV_cruise_m.stl
 runApplication surfaceFeatures
 runApplication blockMesh
-runApplication snappyHexMesh -overwrite
+
+runApplication decomposePar -force -noFields
+
+runParallel snappyHexMesh -overwrite
+
+# OpenFOAM 14: reconstructPar também reconstrói a malha
+runApplication reconstructPar -constant
+
 runApplication checkMesh -allGeometry -allTopology
 
+echo "========================================="
+echo " Mesh generation completed"
+echo "========================================="
