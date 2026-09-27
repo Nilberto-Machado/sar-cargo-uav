@@ -1,0 +1,72 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : surfaceFeatures
+Date   : Sep 27 2026
+Time   : 11:31:35
+Host   : "Aurora"
+PID    : 17900
+I/O    : uncollated
+Case   : /mnt/c/GitHub/sar-cargo-uav/openfoam/manufacturable_mesh_families/cases/coarse
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading "surfaceFeaturesDict"
+
+Surface            : "CargoUAV_partitioned_m.stl"
+
+
+Feature line extraction is only valid on closed manifold surfaces.
+Statistics:
+Triangles    : 84446
+Vertices     : 42225
+Bounding Box : (0 -2.0999999 -0.31711558) (2.8499999 2.0999999 0.5878346)
+
+
+Constructing feature set from included angle 2.6179939
+Selecting edges purely based on geometric tests: no
+Removing all non-manifold edges (edges with > 2 connected faces) unless they cross multiple regions
+
+Initial feature set:
+    feature points : 334
+    feature edges  : 2562
+    of which
+        region edges   : 185
+        external edges : 1633
+        internal edges : 744
+
+
+Final feature set:
+points      : 2565
+edges       : 2562
+boundingBox : (0 -2.0999999 -0.055190943) (2.8499999 2.0999999 0.5878346)
+point classification :
+    convex feature points          :      206
+    concave feature points         :       38
+    mixed feature points           :       90
+    other (non-feature) points     :     2231
+edge classification :
+    external (convex angle) edges  :     1784
+    internal (concave angle) edges :      777
+    flat region edges              :        1
+    open edges                     :        0
+    multiply connected edges       :        0
+
+Writing extendedFeatureEdgeMesh to "constant/extendedFeatureEdgeMesh/CargoUAV_partitioned_m.extendedFeatureEdgeMesh"
+
+Writing featureEdgeMesh to "constant/geometry/CargoUAV_partitioned_m.eMesh"
+
+ExecutionTime = 0.245672 s  ClockTime = 2 s
+
+End
+

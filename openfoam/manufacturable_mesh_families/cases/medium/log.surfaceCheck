@@ -1,0 +1,79 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : surfaceCheck constant/geometry/CargoUAV_partitioned_m.stl
+Date   : Sep 27 2026
+Time   : 11:40:14
+Host   : "Aurora"
+PID    : 19075
+I/O    : uncollated
+Case   : /mnt/c/GitHub/sar-cargo-uav/openfoam/manufacturable_mesh_families/cases/medium
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Reading surface from "constant/geometry/CargoUAV_partitioned_m.stl" ...
+
+Statistics:
+Triangles    : 84446
+Vertices     : 42225
+Bounding Box : (0 -2.1 -0.317116) (2.85 2.1 0.587835)
+
+Region	Size
+------	----
+airframe	80357
+nacelles	1711
+rotors	0
+pusher	2378
+
+
+Surface has no illegal triangles.
+
+Triangle quality (equilateral=1, collapsed=0):
+    0 .. 0.05  : 0.00499728
+    0.05 .. 0.1  : 0.000580252
+    0.1 .. 0.15  : 0.00172892
+    0.15 .. 0.2  : 0.0090472
+    0.2 .. 0.25  : 0.0103261
+    0.25 .. 0.3  : 0.00577884
+    0.3 .. 0.35  : 0.00719987
+    0.35 .. 0.4  : 0.00710513
+    0.4 .. 0.45  : 0.0102551
+    0.45 .. 0.5  : 0.0131445
+    0.5 .. 0.55  : 0.01273
+    0.55 .. 0.6  : 0.012055
+    0.6 .. 0.65  : 0.0132037
+    0.65 .. 0.7  : 0.0131682
+    0.7 .. 0.75  : 0.0143761
+    0.75 .. 0.8  : 0.0318428
+    0.8 .. 0.85  : 0.0601805
+    0.85 .. 0.9  : 0.112948
+    0.9 .. 0.95  : 0.141428
+    0.95 .. 1  : 0.517905
+
+    min 2.11307e-07 for triangle 2769
+    max 1 for triangle 83290
+
+Edges:
+    min 0.000222752 for edge 102403 points (2.53908 0.687443 0.57646)(2.53908 0.687586 0.576289)
+    max 0.661053 for edge 4372 points (0.843544 0.257336 0.0229432)(0.868703 0.917831 0.0331686)
+
+Checking for points less than 1e-6 of bounding box ((2.85 4.2 0.90495) metre) apart.
+Found 0 nearby points.
+
+Surface is closed. All edges connected to two faces.
+
+Number of unconnected parts : 1
+
+Number of zones (connected area with consistent normal) : 1
+
+
+End
+

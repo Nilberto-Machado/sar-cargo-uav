@@ -1,0 +1,5 @@
+# y+ ()         
+# Time          	patch           	min             	max             	average         
+1000            	aircraft_airframe	4.62772836e+00	1.54282617e+02	4.88882023e+01
+1000            	aircraft_nacelles	1.37448969e+01	1.48213664e+02	7.35839205e+01
+1000            	aircraft_pusher	1.84851500e+01	1.08347001e+02	6.95446648e+01

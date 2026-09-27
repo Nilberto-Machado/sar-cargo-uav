@@ -1,0 +1,186 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : decomposePar -force
+Date   : Sep 27 2026
+Time   : 12:03:19
+Host   : "Aurora"
+PID    : 20855
+I/O    : uncollated
+Case   : /mnt/c/GitHub/sar-cargo-uav/openfoam/manufacturable_mesh_families/cases/medium
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Removing 0 existing processor directories
+
+Calculating distribution of cells
+
+
+Selecting decomposer scotch
+
+Finished decomposition in 1.691531 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 92832
+    Number of faces shared with processor 1 = 2739
+    Number of faces shared with processor 3 = 2422
+    Number of faces shared with processor 4 = 19
+    Number of faces shared with processor 6 = 263
+    Number of faces shared with processor 7 = 1644
+    Number of processor patches = 5
+    Number of processor faces = 7087
+    Number of boundary faces = 7691
+
+Processor 1
+    Number of cells = 92917
+    Number of faces shared with processor 0 = 2739
+    Number of faces shared with processor 3 = 402
+    Number of faces shared with processor 5 = 791
+    Number of faces shared with processor 6 = 1732
+    Number of processor patches = 4
+    Number of processor faces = 5664
+    Number of boundary faces = 8630
+
+Processor 2
+    Number of cells = 92996
+    Number of faces shared with processor 3 = 1364
+    Number of faces shared with processor 4 = 1492
+    Number of faces shared with processor 9 = 586
+    Number of processor patches = 3
+    Number of processor faces = 3442
+    Number of boundary faces = 13312
+
+Processor 3
+    Number of cells = 94659
+    Number of faces shared with processor 0 = 2422
+    Number of faces shared with processor 1 = 402
+    Number of faces shared with processor 2 = 1364
+    Number of faces shared with processor 4 = 2861
+    Number of faces shared with processor 5 = 466
+    Number of faces shared with processor 6 = 245
+    Number of faces shared with processor 7 = 879
+    Number of faces shared with processor 8 = 190
+    Number of faces shared with processor 9 = 2111
+    Number of processor patches = 9
+    Number of processor faces = 10940
+    Number of boundary faces = 1311
+
+Processor 4
+    Number of cells = 94659
+    Number of faces shared with processor 0 = 19
+    Number of faces shared with processor 2 = 1492
+    Number of faces shared with processor 3 = 2861
+    Number of faces shared with processor 7 = 266
+    Number of processor patches = 4
+    Number of processor faces = 4638
+    Number of boundary faces = 0
+
+Processor 5
+    Number of cells = 93086
+    Number of faces shared with processor 1 = 791
+    Number of faces shared with processor 3 = 466
+    Number of faces shared with processor 6 = 2155
+    Number of faces shared with processor 8 = 802
+    Number of faces shared with processor 9 = 186
+    Number of processor patches = 5
+    Number of processor faces = 4400
+    Number of boundary faces = 7409
+
+Processor 6
+    Number of cells = 94231
+    Number of faces shared with processor 0 = 263
+    Number of faces shared with processor 1 = 1732
+    Number of faces shared with processor 3 = 245
+    Number of faces shared with processor 5 = 2155
+    Number of faces shared with processor 7 = 2439
+    Number of faces shared with processor 8 = 1547
+    Number of faces shared with processor 9 = 63
+    Number of processor patches = 7
+    Number of processor faces = 8444
+    Number of boundary faces = 8526
+
+Processor 7
+    Number of cells = 92968
+    Number of faces shared with processor 0 = 1644
+    Number of faces shared with processor 3 = 879
+    Number of faces shared with processor 4 = 266
+    Number of faces shared with processor 6 = 2439
+    Number of faces shared with processor 8 = 762
+    Number of faces shared with processor 9 = 43
+    Number of processor patches = 6
+    Number of processor faces = 6033
+    Number of boundary faces = 7834
+
+Processor 8
+    Number of cells = 94212
+    Number of faces shared with processor 3 = 190
+    Number of faces shared with processor 5 = 802
+    Number of faces shared with processor 6 = 1547
+    Number of faces shared with processor 7 = 762
+    Number of faces shared with processor 9 = 2553
+    Number of processor patches = 5
+    Number of processor faces = 5854
+    Number of boundary faces = 8586
+
+Processor 9
+    Number of cells = 94659
+    Number of faces shared with processor 2 = 586
+    Number of faces shared with processor 3 = 2111
+    Number of faces shared with processor 5 = 186
+    Number of faces shared with processor 6 = 63
+    Number of faces shared with processor 7 = 43
+    Number of faces shared with processor 8 = 2553
+    Number of processor patches = 6
+    Number of processor faces = 5542
+    Number of boundary faces = 6892
+
+Number of processor faces = 31022
+Max number of cells = 94659 (0.99987303% above average 93721.9)
+Max number of processor patches = 9 (66.666667% above average 5.4)
+Max number of faces between processors = 10940 (76.326478% above average 6204.4)
+
+Time = 0s
+
+Decomposing FV fields
+
+    Decomposing volScalarFields
+
+        p
+        nut
+        k
+        omega
+
+    Decomposing volVectorFields
+
+        U
+
+    Decomposing surfaceScalarFields
+
+        phi
+
+Decomposing point fields
+
+    (no point fields)
+
+End
+

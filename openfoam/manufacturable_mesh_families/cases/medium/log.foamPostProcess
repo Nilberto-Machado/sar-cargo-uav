@@ -1,0 +1,47 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-7b05503f98a8
+Exec   : foamPostProcess -solver incompressibleFluid -func yPlus -latestTime
+Date   : Sep 27 2026
+Time   : 12:18:52
+Host   : "Aurora"
+PID    : 20918
+I/O    : uncollated
+Case   : /mnt/c/GitHub/sar-cargo-uav/openfoam/manufacturable_mesh_families/cases/medium
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 1000
+
+
+Constructing functionObjects from system/functions
+    Selecting yPlus with name yPlus
+Time = 1000s
+
+Selecting solver incompressibleFluid
+
+Selecting viscosity model constant
+
+Selecting momentum transport model type RAS
+    Selecting RAS turbulence model kOmegaSST
+
+Selecting patchDistMethod meshWave
+yPlus yPlus write:
+    writing object yPlus
+    patch aircraft_airframe y+ : min = 3.140606, max = 139.2821, average = 42.77502
+    patch aircraft_nacelles y+ : min = 8.4834261, max = 143.94362, average = 61.842778
+    patch aircraft_pusher y+ : min = 16.046149, max = 101.86973, average = 61.911453
+
+
+End
+
