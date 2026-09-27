@@ -12,10 +12,54 @@ __pycache__/
 
 # OpenFOAM generated runtime data
 openfoam/**/processor*/
-openfoam/**/postProcessing/
+
+# OpenFOAM post-processing:
+# ignore generated data by default, but preserve force coefficients
+
+openfoam/**/postProcessing/*
+!openfoam/**/postProcessing/forceCoeffs/
+!openfoam/**/postProcessing/forceCoeffs/**
 openfoam/**/logs/
 openfoam/**/log.*
 
 # Operating-system metadata
 Thumbs.db
 .DS_Store
+
+# ============================================================
+# Obsidian - local state and private plugin settings
+# ============================================================
+
+# Local UI state - machine specific
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian trash
+.trash/
+
+# Plugin local settings may contain API keys/tokens
+.obsidian/plugins/*/data.json
+
+# Temporary backups created during UTF-8 repair
+docs/**/*.utf8-backup
+
+
+# ============================================================
+# Python environments and caches
+# ============================================================
+
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+
+# ============================================================
+# OpenFOAM additional generated data
+# ============================================================
+
+# ParaView / exported visualization data
+openfoam/**/VTK/
+
+# OpenFOAM/ParaView placeholder files
+openfoam/**/*.foam

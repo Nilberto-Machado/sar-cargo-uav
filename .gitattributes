@@ -1,2 +1,15 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Default text handling
+* text=auto
+
+# Markdown / config / source files use LF in repository
+*.md   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.py   text eol=lf
+*.sh   text eol=lf
+
+# PowerShell may stay CRLF on Windows
+*.ps1  text eol=crlf

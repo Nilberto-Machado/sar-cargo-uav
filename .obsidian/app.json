@@ -1,0 +1,12 @@
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "docs/inbox",
+  "attachmentFolderPath": "docs/attachments",
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    ".git/",
+    "__pycache__/",
+    "tmp/",
+    "doc_review_render/"
+  ]
+}
