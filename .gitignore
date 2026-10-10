@@ -40,6 +40,9 @@ Thumbs.db
 # Plugin local settings may contain API keys/tokens
 .obsidian/plugins/*/data.json
 
+# Shared, reviewed baseline for Obsidian Git (contains no credentials)
+!.obsidian/plugins/obsidian-git/data.json
+
 # Temporary backups created during UTF-8 repair
 docs/**/*.utf8-backup
 
